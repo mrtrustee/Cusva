@@ -1,0 +1,108 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cusva</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .phone-widget {
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .call-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .end-button {
+            background: #dc3545;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🤖 Cusva AI Customer Assistant</h1>
+    <p>24/7 AI-powered customer support</p>
+
+    <div class="phone-widget">
+        <h3>Call Our AI Assistant</h3>
+        <div id="status" class="status">Ready to call</div>
+        <button id="callButton" class="call-button" onclick="startCall()">
+            📞 Start Call
+        </button>
+        <button id="endButton" class="call-button end-button" onclick="endCall()" disabled>
+            📞 End Call
+        </button>
+    </div>
+
+    <div class="info">
+        <h4>What I can help with:</h4>
+        <ul>
+            <li>📦 Order status and tracking</li>
+            <li>🛍️ Product information</li>
+            <li>↩️ Returns and exchanges</li>
+            <li>🔧 Technical support</li>
+            <li>🏪 Store locations and hours</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    let currentCall = null;
+
+    async function startCall() {
+        try {
+            document.getElementById('status').innerHTML = 'Connecting...';
+            document.getElementById('callButton').disabled = true;
+            document.getElementById('endButton').disabled = false;
+
+            // In a real implementation, you would use Vapi's client SDK
+            // This is a simplified version
+            const response = await fetch('/create-assistant', { method: 'POST' });
+            const data = await response.json();
+
+            currentCall = data.id;
+            document.getElementById('status').innerHTML = 'Call connected! Speaking with AI assistant...';
+
+        } catch (error) {
+            console.error('Error starting call:', error);
+            document.getElementById('status').innerHTML = 'Error starting call';
+        }
+    }
+
+    function endCall() {
+        document.getElementById('status').innerHTML = 'Call ended. Thank you!';
+        document.getElementById('callButton').disabled = false;
+        document.getElementById('endButton').disabled = true;
+        currentCall = null;
+    }
+</script>
+</body>
+</html>

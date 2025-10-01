@@ -1,0 +1,18 @@
+{
+  "name": "cusvaproject",
+  "version": "1.0.0",
+  "description": "Cusva is smart customer service voice assistant built using the following stack:\r 1.Vapi\r 2.Javascript\r 3.Nodejs for the backend and \r 4.Html",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrtrustee/Cusva.git"
+  },
+  "keywords": [],
+  "author": "Isaiah Ayomide Fakorede",
+  "homepage": "https://github.com/mrtrustee/Cusva#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
+}
